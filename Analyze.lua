@@ -9,17 +9,20 @@ do
     file.close()
 end
 
-function chunk(txt, data)
-    local arrayOfWords = {}
-    for word in string.gmatch(txt, "[^%s\t\n]-") do
-        arrayOfWords[#arrayOfWords + 1].word = word
-    end
-    for k, v in ipairs(arrayOfWords) do
-        if k > 1 then
-            if arrayOfWords[k - 1]:lower() == "the" then
-                v.type = "noun"
-                return nil --Finnish later
-            end
+local baseNet = {
+    wordList = {
+        before = {},
+        after = {}
+    }
+    insertSentance = function(self, txt)
+        local words = {}
+        for k, v in txt:gmatch("[^%s\t\n]-") do
+            words[k] = v
         end
-    end
-end
+        for i, iV in ipairs(words) do
+            for j, jV in ipairs(words) do
+                if j ~= i then
+                    if j > i then
+                        self.wordList.after[iV][j - i] = {}
+                        local word Cache = self.wordList.after[iV][j - i]
+              
