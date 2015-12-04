@@ -24,5 +24,5 @@ local baseNet = {
                 if j ~= i then
                     if j > i then
                         self.wordList.after[iV][j - i] = {}
-                        local word Cache = self.wordList.after[iV][j - i]
-              
+                        local wordCache = self.wordList.after[iV][j - i]
+                        
